@@ -1,0 +1,26 @@
+
+
+	
+<br>
+
+/user add link
+table
+	thead
+		tr
+			td Name
+			td Country
+			td Action
+			
+	tbody
+		- @persons.each do |person|
+			tr
+			td = person.name
+			td = person.country
+			td  	
+				form action='/remove/#{person.id}' method='post'
+					button type='submit'
+						|Remove	
+
+<br>
+<br>	
+a href='/new' ADD PERSON
