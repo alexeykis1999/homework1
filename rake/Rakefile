@@ -1,0 +1,25 @@
+
+task :check_dir do
+  puts "check"
+  begin
+    rm_rf 'test'
+  rescue
+  end
+end
+
+task :create_dir => :check_dir do
+  puts "create"
+  mkdir 'test'
+end
+
+task :mkfile => :create_dir do
+  puts "ruby"
+  cd 'test'
+  `echo "puts 'Hello, world'" > 1.rb`
+  `echo "puts 'This is the second line'" >> 1.rb`
+  ruby '1.rb'
+end
+
+task :del do
+  `./greet.sh`
+end
