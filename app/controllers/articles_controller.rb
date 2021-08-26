@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
+
 	#around_action :testing
-	rescue_from ActionController::RoutingError, with: :record_not_found
+	#rescue_from ActionController::RoutingError, with: :record_not_found
 	
 	def testing
 		puts "----------------------------------"
@@ -18,12 +19,13 @@ class ArticlesController < ApplicationController
   end
 
   def show
+  	
   	@article = Article.find(params[:id])
-  	respond_to do |format|
-			format.html # show.html.erb
+  	#respond_to do |format|
+			#format.html # show.html.erb
 			#format.xml { render :xml => @article.to_xml }
-		end
-		flash.now[:message] = "Hello current action"
+		#end
+		#flash.now[:message] = "Hello current action"
   end
 
   def new
@@ -36,7 +38,7 @@ class ArticlesController < ApplicationController
     if @article.save
       redirect_to @article
     else
-      render :new
+      render "new"
     end
   end
 
@@ -65,8 +67,6 @@ class ArticlesController < ApplicationController
       params.require(:article).permit(:title, :body)
     end
 
-    def record_not_found
-      render plain: "404 Not Found", status: 404
-    end
+
 end
 

@@ -1,0 +1,10 @@
+<h2><%= t 'title' %></h2>
+<h3><%= @article.title %></h1>
+<h4><%= t 'body' %></h4>
+<p><%= @article.body %></p>
+
+<ul>
+  <li><%= link_to (t "Edit"), edit_article_path(@article) %></li>
+  <li><%= link_to (t "Destroy"), article_path(@article), method: :delete%></li>
+</ul>
+

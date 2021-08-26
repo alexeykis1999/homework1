@@ -1,10 +1,6 @@
 class ApplicationController < ActionController::Base
-rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-rescue_from ActionController::RoutingError, with: :routing_error
-
-     def route_not_found
-    	render file: Rails.public_path.join('404.html'), status: :not_found, layout: false
-  	end
+	before_action :set_locale
+	
  
  
   private
@@ -13,7 +9,20 @@ rescue_from ActionController::RoutingError, with: :routing_error
       render plain: "404 Not Found", status: 404
     end
     
+		def default_url_options
+			{locale: I18n.locale}
+		end
 
+		def set_locale
+			I18n.locale = extract_locale || I18n.default_locale
+		end	
+
+		def extract_locale
+			parsed_locale = params[:locale]
+			I18n.available_locales.map(&:to_s).include?(parsed_locale) ?
+				parsed_locale.to_sym :
+				nil
+		end
   
    # def routing_error
     #	flash[:error] = "You don't have access to this section."
